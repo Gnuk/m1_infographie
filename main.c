@@ -186,6 +186,7 @@ void init_count_frames() {
 /* La fonction qui dessine la scène */
 int drawGLScene( GLvoid )
 {
+	int i;
     /* rotational vars for the triangle and quad, respectively */
     static GLfloat rtri;
 
@@ -207,6 +208,15 @@ int drawGLScene( GLvoid )
 
     if (draw_points) {
       /* CODE DE LA QUESTION 1 */
+		glBegin(GL_POINTS);
+		for(i = 0; i<nb_global_pts; i++){
+			glVertex3d(
+					global_pts[i].coord.a3d->x,
+					global_pts[i].coord.a3d->y,
+					global_pts[i].coord.a3d->z
+  			);
+		}
+		glEnd();
     }
 
     /* Draw it to the screen */
