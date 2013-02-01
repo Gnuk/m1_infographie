@@ -124,7 +124,8 @@ int N=100;
 void initGLScene() {  
   printf("Initializing scene with N=%d\n",N);
 
-  tetra = test_random(N);
+//   tetra = test_random(N);
+  tetra = test_simple(N);
 
   if (tetra) {
     if (Smooth) {

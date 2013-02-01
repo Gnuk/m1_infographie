@@ -44,7 +44,10 @@ half_edge remove_visible(half_edge e, gl_vertex *pts) {
     /* QUESTION 2 : fonction itéré sur tous les triangles
        et qui teste si on doit garder le triangle.
        Elle conserve aussi les 3 arrêtes dans la liste sides */
-
+		if(gl_det(v1, v2, v3, pts) > 0){
+			remove_triangle(f);
+		}
+		
     /* INSERER ICI */
   }
 
@@ -70,6 +73,7 @@ half_edge next_on_side(half_edge e) {
 void fill_hole(half_edge e, gl_vertex *pts) {
 
   /* Question 2 */
+	
   /* INSERER ICI */
 }
 

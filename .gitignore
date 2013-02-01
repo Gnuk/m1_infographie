@@ -20,6 +20,7 @@
 # Backup files
 *~
 *.bak
+*.kate-swp
 
 # Makefile
 Makefile
