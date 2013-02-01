@@ -251,11 +251,13 @@ void handleKeyPress( SDL_keysym *keysym )
 	  break;
 	case SDLK_KP_PLUS:
 	case SDLK_PLUS:
+	case SDLK_d:
 	  N += 10;
 	  initGLScene();
 	  break;
 	case SDLK_KP_MINUS:
 	case SDLK_MINUS:
+	case SDLK_c:
 	  if (N > 10) N -= 10;
 	  initGLScene();
 	  break;
