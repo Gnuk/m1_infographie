@@ -16,7 +16,7 @@ else
 GC_LIB=
 endif
 
-SRCS=$(GC_SRC) triangulation.c geometry.c array.c triangulation_tools.c main.c
+SRCS=$(GC_SRC) triangulation.c geometry.c array.c triangulation_tools.c convex.c main.c 
 OBJS=$(SRCS:.c=.o)
 INCLUDES=
 CFLAGS= $(INCLUDES) -Wall -g -D $(GC)
@@ -37,38 +37,107 @@ clean:
 # DO NOT DELETE
 
 triangulation.o: /usr/include/stdlib.h /usr/include/features.h
-triangulation.o: /usr/include/alloca.h /usr/include/stdio.h
+triangulation.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
+triangulation.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+triangulation.o: /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h
+triangulation.o: /usr/include/endian.h /usr/include/bits/endian.h
+triangulation.o: /usr/include/bits/byteswap.h /usr/include/bits/types.h
+triangulation.o: /usr/include/bits/typesizes.h
+triangulation.o: /usr/include/bits/byteswap-16.h /usr/include/sys/types.h
+triangulation.o: /usr/include/time.h /usr/include/sys/select.h
+triangulation.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+triangulation.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+triangulation.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+triangulation.o: /usr/include/bits/stdlib-float.h /usr/include/stdio.h
 triangulation.o: /usr/include/libio.h /usr/include/_G_config.h
-triangulation.o: /usr/include/wchar.h /usr/include/assert.h tiny_gc.h
-triangulation.o: triangulation.h
-geometry.o: /usr/include/math.h /usr/include/features.h geometry.h
-array.o: /usr/include/assert.h /usr/include/features.h /usr/include/string.h
-array.o: /usr/include/xlocale.h tiny_gc.h /usr/include/stdlib.h
-array.o: /usr/include/alloca.h array.h /usr/include/GL/gl.h
+triangulation.o: /usr/include/wchar.h /usr/include/bits/stdio_lim.h
+triangulation.o: /usr/include/bits/sys_errlist.h /usr/include/assert.h
+triangulation.o: tiny_gc.h triangulation.h
+geometry.o: /usr/include/math.h /usr/include/features.h
+geometry.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
+geometry.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+geometry.o: /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h
+geometry.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+geometry.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+geometry.o: /usr/include/bits/mathcalls.h geometry.h
+array.o: /usr/include/assert.h /usr/include/features.h
+array.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
+array.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+array.o: /usr/include/string.h /usr/include/xlocale.h tiny_gc.h
+array.o: /usr/include/stdlib.h /usr/include/bits/waitflags.h
+array.o: /usr/include/bits/waitstatus.h /usr/include/endian.h
+array.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+array.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+array.o: /usr/include/bits/byteswap-16.h /usr/include/sys/types.h
+array.o: /usr/include/time.h /usr/include/sys/select.h
+array.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+array.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+array.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+array.o: /usr/include/bits/stdlib-float.h array.h /usr/include/GL/gl.h
 array.o: /usr/include/GL/glext.h /usr/include/inttypes.h
-array.o: /usr/include/stdint.h geometry.h triangulation.h
+array.o: /usr/include/stdint.h /usr/include/bits/wchar.h geometry.h
+array.o: triangulation.h
 triangulation_tools.o: /usr/include/assert.h /usr/include/features.h
+triangulation_tools.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
+triangulation_tools.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
 triangulation_tools.o: triangulation_tools.h array.h /usr/include/GL/gl.h
 triangulation_tools.o: /usr/include/GL/glext.h /usr/include/inttypes.h
-triangulation_tools.o: /usr/include/stdint.h geometry.h triangulation.h
-main.o: /usr/include/stdio.h /usr/include/features.h /usr/include/libio.h
-main.o: /usr/include/_G_config.h /usr/include/wchar.h /usr/include/stdlib.h
-main.o: /usr/include/alloca.h /usr/include/GL/gl.h /usr/include/GL/glext.h
-main.o: /usr/include/inttypes.h /usr/include/stdint.h /usr/include/GL/glu.h
+triangulation_tools.o: /usr/include/stdint.h /usr/include/bits/wchar.h
+triangulation_tools.o: geometry.h triangulation.h
+convex.o: /usr/include/stdio.h /usr/include/features.h
+convex.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
+convex.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+convex.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+convex.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+convex.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+convex.o: /usr/include/assert.h /usr/include/stdlib.h
+convex.o: /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h
+convex.o: /usr/include/endian.h /usr/include/bits/endian.h
+convex.o: /usr/include/bits/byteswap.h /usr/include/bits/byteswap-16.h
+convex.o: /usr/include/sys/types.h /usr/include/time.h
+convex.o: /usr/include/sys/select.h /usr/include/bits/select.h
+convex.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+convex.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+convex.o: /usr/include/alloca.h /usr/include/bits/stdlib-float.h geometry.h
+convex.o: array.h /usr/include/GL/gl.h /usr/include/GL/glext.h
+convex.o: /usr/include/inttypes.h /usr/include/stdint.h
+convex.o: /usr/include/bits/wchar.h triangulation.h triangulation_tools.h
+convex.o: convex.h tiny_gc.h
+main.o: /usr/include/stdio.h /usr/include/features.h
+main.o: /usr/include/stdc-predef.h /usr/include/sys/cdefs.h
+main.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+main.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+main.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+main.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+main.o: /usr/include/stdlib.h /usr/include/bits/waitflags.h
+main.o: /usr/include/bits/waitstatus.h /usr/include/endian.h
+main.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+main.o: /usr/include/bits/byteswap-16.h /usr/include/sys/types.h
+main.o: /usr/include/time.h /usr/include/sys/select.h
+main.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+main.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+main.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+main.o: /usr/include/bits/stdlib-float.h /usr/include/GL/gl.h
+main.o: /usr/include/GL/glext.h /usr/include/inttypes.h /usr/include/stdint.h
+main.o: /usr/include/bits/wchar.h /usr/include/GL/glu.h
 main.o: /usr/include/SDL/SDL.h /usr/include/SDL/SDL_main.h
 main.o: /usr/include/SDL/SDL_stdinc.h /usr/include/SDL/SDL_config.h
 main.o: /usr/include/SDL/SDL_platform.h /usr/include/string.h
 main.o: /usr/include/xlocale.h /usr/include/strings.h /usr/include/ctype.h
-main.o: /usr/include/endian.h /usr/include/iconv.h
-main.o: /usr/include/SDL/begin_code.h /usr/include/SDL/close_code.h
-main.o: /usr/include/SDL/SDL_audio.h /usr/include/SDL/SDL_error.h
-main.o: /usr/include/SDL/SDL_endian.h /usr/include/SDL/SDL_mutex.h
-main.o: /usr/include/SDL/SDL_thread.h /usr/include/SDL/SDL_rwops.h
-main.o: /usr/include/SDL/SDL_cdrom.h /usr/include/SDL/SDL_cpuinfo.h
-main.o: /usr/include/SDL/SDL_events.h /usr/include/SDL/SDL_active.h
-main.o: /usr/include/SDL/SDL_keyboard.h /usr/include/SDL/SDL_keysym.h
-main.o: /usr/include/SDL/SDL_mouse.h /usr/include/SDL/SDL_video.h
-main.o: /usr/include/SDL/SDL_joystick.h /usr/include/SDL/SDL_quit.h
-main.o: /usr/include/SDL/SDL_loadso.h /usr/include/SDL/SDL_timer.h
-main.o: /usr/include/SDL/SDL_version.h /usr/include/math.h tiny_gc.h
-main.o: geometry.h array.h triangulation.h triangulation_tools.h
+main.o: /usr/include/iconv.h /usr/include/SDL/begin_code.h
+main.o: /usr/include/SDL/close_code.h /usr/include/SDL/SDL_audio.h
+main.o: /usr/include/SDL/SDL_error.h /usr/include/SDL/SDL_endian.h
+main.o: /usr/include/SDL/SDL_mutex.h /usr/include/SDL/SDL_thread.h
+main.o: /usr/include/SDL/SDL_rwops.h /usr/include/SDL/SDL_cdrom.h
+main.o: /usr/include/SDL/SDL_cpuinfo.h /usr/include/SDL/SDL_events.h
+main.o: /usr/include/SDL/SDL_active.h /usr/include/SDL/SDL_keyboard.h
+main.o: /usr/include/SDL/SDL_keysym.h /usr/include/SDL/SDL_mouse.h
+main.o: /usr/include/SDL/SDL_video.h /usr/include/SDL/SDL_joystick.h
+main.o: /usr/include/SDL/SDL_quit.h /usr/include/SDL/SDL_loadso.h
+main.o: /usr/include/SDL/SDL_timer.h /usr/include/SDL/SDL_version.h
+main.o: /usr/include/math.h /usr/include/bits/huge_val.h
+main.o: /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h
+main.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+main.o: /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h
+main.o: /usr/include/sys/time.h tiny_gc.h geometry.h array.h triangulation.h
+main.o: triangulation_tools.h convex.h
