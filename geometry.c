@@ -62,13 +62,13 @@ void translate3d(point3d A, const vecteur3d V) {
 double dot_prod3d(const vecteur3d A, const vecteur3d B) {
   return(A->x * B->x + A->y * B->y + A->z * B->z);
 }
-double dot_prod3f(const vecteur3f A, const vecteur3f B) {
+float dot_prod3f(const vecteur3f A, const vecteur3f B) {
   return(A->x * B->x + A->y * B->y + A->z * B->z);
 }
 double dot_prod2d(const vecteur2d A, const vecteur2d B) {
   return(A->x * B->x + A->y * B->y);
 }
-double dot_prod2f(const vecteur2f A, const vecteur2f B) {
+float dot_prod2f(const vecteur2f A, const vecteur2f B) {
   return(A->x * B->x + A->y * B->y);
 }
 
@@ -139,20 +139,20 @@ void vec_prod3f(vecteur3f R, const vecteur3f A, const vecteur3f B) {
 
 double det3d(const vecteur3d A, const vecteur3d B, const vecteur3d C) {
   return(  A->x*(  B->y * C->z - B->z * C-> y)
-	   - A->y*(- B->x * C->z + B->z * C-> x)
+	   - A->y*(  B->x * C->z - B->z * C-> x)
 	   + A->z*(  B->x * C->y - B->y * C-> x));
 }
 
-double det3f(const vecteur3f A, const vecteur3f B, const vecteur3f C) {
+float det3f(const vecteur3f A, const vecteur3f B, const vecteur3f C) {
   return(  A->x*(  B->y * C->z - B->z * C-> y)
-	   - A->y*(- B->x * C->z + B->z * C-> x)
+	   - A->y*(  B->x * C->z - B->z * C-> x)
 	   + A->z*(  B->x * C->y - B->y * C-> x));
 }
 
 double det2d(const vecteur2d A, const vecteur2d B) {
   return(  A->x*B->y - A->y*B->x );
 }
-double det2f(const vecteur2f A, const vecteur2f B) {
+float det2f(const vecteur2f A, const vecteur2f B) {
   return(  A->x*B->y - A->y*B->x );
 }
 

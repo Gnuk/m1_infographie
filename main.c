@@ -14,6 +14,7 @@
 #include "geometry.h"
 #include "array.h"
 #include "triangulation_tools.h"
+#include "convex.h"
 
 /* La "surface SDL", c'est à dire la fenêtre où l'on dessine
  * obligatoirement une variable globale, car les "callbacks"
@@ -98,11 +99,13 @@ int initGL( GLvoid )
     GLfloat LightPosition[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     glLightfv( GL_LIGHT1, GL_POSITION, LightPosition );
     glEnable(GL_COLOR_MATERIAL);
-    glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-    glEnable(GL_CULL_FACE);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+    /*glEnable(GL_CULL_FACE);*/
 
     /* Really Nice Perspective Calculations */
     glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );
+
+    glPointSize(3.0);
 
     return( 1 );
 }
@@ -110,28 +113,27 @@ int initGL( GLvoid )
 
 /* variable globale de la scène */
 
-half_edge tetra;
-gl_object *gl_tetra;
+half_edge tetra = NULL;
+gl_object *gl_tetra = NULL;
+unsigned char draw_points=1;
+unsigned char draw_volume=0;
+
 
 int N=100;
 
 void initGLScene() {  
+  printf("Initializing scene with N=%d\n",N);
 
-  /* Construction d'un tétraèdre (non régulier) */
+  tetra = test_random(N);
 
-  gl_vertex *v1 = GLvertex3f(1.0,0.0,0.0);
-  gl_vertex *v2 = GLvertex3f(0.0,1.0,0.0);
-  gl_vertex *v3 = GLvertex3f(0.0,0.0,1.0);
-  gl_vertex *v4 = GLvertex3f(-1.0,-1.0,-1.0);
-
-  tetra = tetraedron(v1,v2,v3,v4);
-  if (Smooth) {
-    set_average_normal(tetra);
-    gl_tetra = triangulation_to_gl_object(tetra);
-  } else {
-    gl_tetra = triangulation_poly_to_gl_object(tetra);
+  if (tetra) {
+    if (Smooth) {
+      set_average_normal(tetra);
+      gl_tetra = triangulation_to_gl_object(tetra);
+    } else {
+      gl_tetra = triangulation_poly_to_gl_object(tetra);
+    }
   }
-
 }
 
 void toggleSmooth() {
@@ -148,26 +150,38 @@ void toggleSmooth() {
 
 static unsigned int frames = 0;
 static struct timeval lasttime;
+static double lastframe;
+
  
-void count_frames() {
+double count_frames() {
   struct timeval curtime;
 
   frames++;
   gettimeofday(&curtime,NULL);
+
+  double new = curtime.tv_sec  + curtime.tv_usec * 1e-6;
+  double delta = new - lastframe;
+  lastframe = new;
+
   if (curtime.tv_sec - lasttime.tv_sec >= 5) {
-    printf("%.1f frames by second\n",
+    printf("%.1lf frames by second\n",
 	   (double) frames / 
 	   ((double) curtime.tv_sec - (double) lasttime.tv_sec 
 	    + (double) (curtime.tv_usec -lasttime.tv_usec) * 1e-6));
     lasttime = curtime;
     frames = 0;
   }
+
+  return delta;  
 }
 
 void init_count_frames() {
   frames = 0;
   gettimeofday(&lasttime,NULL);
+  lastframe = lasttime.tv_sec + lasttime.tv_usec * 1e-6;
 }
+
+
 
 /* La fonction qui dessine la scène */
 int drawGLScene( GLvoid )
@@ -175,7 +189,7 @@ int drawGLScene( GLvoid )
     /* rotational vars for the triangle and quad, respectively */
     static GLfloat rtri;
 
-    count_frames();
+    double delta = count_frames();
 
     /* Clear The Screen And The Depth Buffer */
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -185,15 +199,22 @@ int drawGLScene( GLvoid )
     glTranslatef( 0.0f, 0.0f, -6.0f );
     glRotatef( rtri, 0.0f, 1.0f, 1.0f );
 
-    glColor3f(   0.7f,  0.2f,  0.2f ); 
 
-    glDrawObject(gl_tetra);
+    if (draw_volume && gl_tetra) {
+      glColor3f(   0.7f,  0.2f,  0.2f ); 
+      glDrawObject(gl_tetra);
+    }
+
+    if (draw_points) {
+      /* CODE DE LA QUESTION 1 */
+    }
 
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
 
     /* Increase The Rotation Variable For The Triangle */
-    rtri  += 0.2f;
+
+    rtri  += 45.0f * (float) delta;
 
     return( 1 );
 }
@@ -204,6 +225,7 @@ void handleKeyPress( SDL_keysym *keysym )
 {
     switch ( keysym->sym )
 	{
+	case SDLK_q:
 	case SDLK_ESCAPE:
 	    /* ESC key was pressed */
 	    Quit( 0 );
@@ -217,17 +239,21 @@ void handleKeyPress( SDL_keysym *keysym )
 	case SDLK_s:
 	  toggleSmooth();
 	  break;
-	case SDLK_p:
 	case SDLK_KP_PLUS:
 	case SDLK_PLUS:
 	  N += 10;
 	  initGLScene();
 	  break;
-	case SDLK_m:
 	case SDLK_KP_MINUS:
 	case SDLK_MINUS:
 	  if (N > 10) N -= 10;
 	  initGLScene();
+	  break;
+	case SDLK_p:
+	  draw_points = !draw_points;
+	  break;
+	case SDLK_v:
+	  draw_volume = !draw_volume;
 	  break;
 	default:
 	    break;

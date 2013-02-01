@@ -43,6 +43,13 @@ typedef struct {
  
 } gl_vertex;
 
+#ifndef extern
+#define extern(a,b) a;
+#endif
+extern(gl_vertex *global_pts,NULL)
+extern(size_t nb_global_pts,0)
+
+
 #define VERTEX gl_vertex
 #include "triangulation.h"
 
@@ -51,6 +58,9 @@ gl_vertex* GLvertex2f(float x, float y);
 gl_vertex* GLvertex3f(float x, float y,float z);
 gl_vertex* GLvertex2d(double x, double y);
 gl_vertex* GLvertex3d(double x, double y,double z);
+
+/* affichage */
+void print_vertex(gl_vertex *v);
 
 /* ajout de la normale aux structure ci-dessus */
 void GLnormal3f(gl_vertex *v, float x, float y, float z);

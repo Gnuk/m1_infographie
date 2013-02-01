@@ -94,9 +94,9 @@ void translate3d(point3d A, const vecteur3d V);
 
 /* produit scalaire */
 double dot_prod3d(const vecteur3d A, const vecteur3d B);
-double dot_prod3f(const vecteur3f A, const vecteur3f B);
+float dot_prod3f(const vecteur3f A, const vecteur3f B);
 double dot_prod2d(const vecteur2d A, const vecteur2d B);
-double dot_prod2f(const vecteur2f A, const vecteur2f B);
+float dot_prod2f(const vecteur2f A, const vecteur2f B);
 
 /* produit par un scalaire (change le vecteur) */
 void scal_prod3d(vecteur3d A, double l);
@@ -128,8 +128,8 @@ void vec_prod3f(vecteur3f R, const vecteur3f A, const vecteur3f B);
 
 /* déterminant */
 double det3d(const vecteur3d A, const vecteur3d B, const vecteur3d C);
-double det3f(const vecteur3f A, const vecteur3f B, const vecteur3f C);
+float det3f(const vecteur3f A, const vecteur3f B, const vecteur3f C);
 double det2d(const vecteur2d A, const vecteur2d B);
-double det2f(const vecteur2f A, const vecteur2f B);
+float det2f(const vecteur2f A, const vecteur2f B);
 
 #endif
