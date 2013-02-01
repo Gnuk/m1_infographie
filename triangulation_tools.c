@@ -92,7 +92,7 @@ static void set_average_normal3d(half_edge e, gl_vertex* v) {
 /* on fixe maitenant toutes les normales */
 void set_average_normal(half_edge e) {
 
-  assert(e -> vertex -> dim == 3);
+  assert(e -> vertex -> dim = 3);
 
   if (e -> vertex -> vertex_type == GL_FLOAT)
     iter_vertices(e, set_average_normal3f);
@@ -100,3 +100,4 @@ void set_average_normal(half_edge e) {
     iter_vertices(e, set_average_normal3d);
   else assert(0);
 }
+  
